@@ -13,7 +13,7 @@ contract DewstarToken is ERC20Capped, ERC20Burnable{
     uint256 public blockReward;
     constructor(uint256 cap, uint256 reward) ERC20("DewstarToken","DEW") ERC20Capped(cap * (10 ** decimals())) {
         owner = payable(msg.sender); //since it is declared payable it should also be wrapped with that 
-        _mint(owner, 2024 * (10 ** decimals()));
+        // _mint(owner, 2024 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
     }
 
