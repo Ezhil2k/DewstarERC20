@@ -14,3 +14,8 @@
 ## Next Steps
 
 - Plan to **search for a more comprehensive tutorial** to gain better understanding and find a solution.
+
+## fixed the issue
+
+- I figured out that the problem lied in using the latest openzepplin library was using the old version functions from them but they are removed in the latest version. 
+- so i rewrote the code with the newer version fucntion and it is being deployed sucessfully now.
