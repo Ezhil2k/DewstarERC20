@@ -1,15 +1,7 @@
-// const {expect} = require('chai');
-// const hre = require('hardhat');
-
-// describe("dewstarToken contract", function() {
-//     //global vars
-    
-// })
-
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("DewstarToken contract", function() {
+describe("DewstarToken contract", function () {
   // global vars
   let Token;
   let DewstarToken;
@@ -22,14 +14,11 @@ describe("DewstarToken contract", function() {
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
     Token = await ethers.getContractFactory("DewstarToken");
-    [owner, addr1, addr2] = await hre.ethers.getSigners(); 
-    console.log("GOING TO DEPLOY NOW");
-    
+    [owner, addr1, addr2] = await hre.ethers.getSigners();
+
     DewstarToken = await Token.deploy(tokenCap, tokenBlockReward);
     await DewstarToken.waitForDeployment();
-    
-    console.log("DEPLOYED NOW");
-    
+
   });
 
   describe("Deployment", function () {
@@ -44,12 +33,12 @@ describe("DewstarToken contract", function() {
 
     it("Should set the max capped supply to the argument provided during deployment", async function () {
       const cap = await DewstarToken.cap();
-      expect(Number(hre.ethers.utils.formatEther(cap))).to.equal(tokenCap);
+      expect(Number(hre.ethers.formatEther(cap))).to.equal(tokenCap);
     });
 
     it("Should set the blockReward to the argument provided during deployment", async function () {
       const blockReward = await DewstarToken.blockReward();
-      expect(Number(hre.ethers.utils.formatEther(blockReward))).to.equal(tokenBlockReward);
+      expect(Number(hre.ethers.formatEther(blockReward))).to.equal(tokenBlockReward);
     });
   });
 
@@ -70,10 +59,11 @@ describe("DewstarToken contract", function() {
     it("Should fail if sender doesn't have enough tokens", async function () {
       const initialOwnerBalance = await DewstarToken.balanceOf(owner.address);
       // Try to send 1 token from addr1 (0 tokens) to owner (1000000 tokens).
-      // `require` will evaluate false and revert the transaction.
+      // `require` will evaluate false and revert the transaction.      
+
       await expect(
         DewstarToken.connect(addr1).transfer(owner.address, 1)
-      ).to.be.revertedWith("ERC20: transfer amount exceeds balance");
+      ).to.be.revertedWithCustomError(DewstarToken, 'ERC20InsufficientBalance');
 
       // Owner balance shouldn't have changed.
       expect(await DewstarToken.balanceOf(owner.address)).to.equal(
@@ -92,7 +82,7 @@ describe("DewstarToken contract", function() {
 
       // Check balances.
       const finalOwnerBalance = await DewstarToken.balanceOf(owner.address);
-      expect(finalOwnerBalance).to.equal(initialOwnerBalance.sub(150));
+      expect(finalOwnerBalance).to.equal(initialOwnerBalance - 150n);
 
       const addr1Balance = await DewstarToken.balanceOf(addr1.address);
       expect(addr1Balance).to.equal(100);
@@ -101,5 +91,5 @@ describe("DewstarToken contract", function() {
       expect(addr2Balance).to.equal(50);
     });
   });
-  
+
 });
