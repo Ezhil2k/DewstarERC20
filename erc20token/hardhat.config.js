@@ -1,23 +1,17 @@
 require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
-
-const sepoliaUrl =  process.env.SEPOLIA_INFURA_ENDPOINT;
-const privateKey = process.env.PRIVATE_KEY;
+require('solidity-docgen');
 
 module.exports = {
   solidity: "0.8.20",
-//   settings: {
-//     optimizer: {
-//       enabled: true,
-//       runs: 1000,
-//     },
-//   },
-// allowUnlimitedContractSize: true,
   networks: {
     sepolia: {
-      url: sepoliaUrl,
-      accounts: [privateKey],
-      chainId: 11155111
+      url: process.env.SEPOLIA_INFURA_ENDPOINT,
+      accounts: [process.env.PRIVATE_KEY]
     }
-  }
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_KEY,
+  },
+  docgen: {}
 };
