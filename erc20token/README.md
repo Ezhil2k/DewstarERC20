@@ -44,12 +44,30 @@ Areas for improvement in the project include:
 
 To run the ERC20 token project locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/Ezhil2k/DewstarERC20.git`
-2. Install dependencies: `npm install`
-3. Compile the contracts: `npx hardhat compile`
-4. Run tests: `npx hardhat test`
-5. Deploy the contract: `npx hardhat run scripts/deploy.js --network sepolia `
-6. Verify the contract: `npx hardhat verify --network sepolia <address> <arguments>`
+1. Clone the repository: 
+``` bash
+git clone https://github.com/Ezhil2k/DewstarERC20.git
+```
+2. Install dependencies: 
+```bash
+npm install
+```
+3. Compile the contracts: 
+``` bash
+npx hardhat compile
+```
+4. Run tests: 
+```bash
+npx hardhat test
+```
+5. Deploy the contract: 
+```bash
+npx hardhat run scripts/deploy.js --network sepolia 
+```
+6. Verify the contract: 
+```bash 
+npx hardhat verify --network sepolia <address> <arguments>
+```
 
 ### Environment Variables
 
