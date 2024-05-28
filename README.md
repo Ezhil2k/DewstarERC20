@@ -81,4 +81,3 @@ Below are the required environment variables for the project:
 https://sepolia.etherscan.io/token/0x9905bA4865dB402a4EB05118A1e8860B465AFA7e
 
 ![image](https://github.com/Ezhil2k/DewstarERC20/assets/56902453/ef5c0cf9-b830-4a2e-967c-8e040c46fb59)
-
